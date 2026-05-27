@@ -8,7 +8,7 @@
 
     <style>
     body {
-        /* Imagem de fundo geográfica (Mapa estilizado) */
+      
         background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1920') !important;
         background-size: cover;
         background-position: center; 
@@ -16,7 +16,7 @@
         background-repeat: no-repeat;
     }
 
-    /* Caixa de Clima no canto superior direito */
+    
     .clima-box {
         position: fixed;
         top: 20px;
@@ -144,7 +144,6 @@
     </div>
 
     <script>
-        // Função para traduzir os códigos de clima da Open-Meteo para texto e ícone
         function interpretarWMO(codigo) {
             const tabela = {
                 0: { texto: "Céu limpo", icone: "☀️" },
@@ -175,7 +174,7 @@
 
         async function buscarClima(cidade, uf) {
             try {
-                // 1. Busca a latitude e longitude da cidade usando a API do OpenStreetMap (Nominatim)
+              
                 const geoUrl = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(cidade)}&state=${encodeURIComponent(uf)}&country=Brazil&format=json&limit=1`;
                 const geoResponse = await fetch(geoUrl);
                 const geoData = await geoResponse.json();
@@ -185,7 +184,7 @@
                 const lat = geoData[0].lat;
                 const lon = geoData[0].lon;
 
-                // 2. Busca o clima atual baseado nas coordenadas geográficas encontradas
+               
                 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
                 const weatherResponse = await fetch(weatherUrl);
                 const weatherData = await weatherResponse.json();
@@ -194,13 +193,13 @@
                     const temp = Math.round(weatherData.current_weather.temperature);
                     const infoClima = interpretarWMO(weatherData.current_weather.weathercode);
 
-                    // Atualiza a caixinha do clima no canto superior direito
+                   
                     document.getElementById("climaTemp").innerText = `${temp}°C`;
                     document.getElementById("climaCidade").innerText = `${cidade} - ${uf}`;
                     document.getElementById("climaCondicao").innerText = infoClima.texto;
                     document.getElementById("climaIcone").innerText = infoClima.icone;
                     
-                    // Exibe o card removendo a classe do Bootstrap 'd-none'
+                   
                     document.getElementById("climaCard").classList.remove("d-none");
                 }
             } catch (err) {
@@ -239,8 +238,7 @@
                 
                 selectEstado.classList.add("form-control-preenchido");
                 txtResumo.classList.add("form-control-preenchido");
-                
-                // Disparar a busca do clima usando os dados retornados do CEP
+                git add
                 buscarClima(data.localidade, data.uf);
                 
             } catch (error) {
