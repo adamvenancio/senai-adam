@@ -8,7 +8,6 @@
 
     <style>
     body {
-      
         background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1920') !important;
         background-size: cover;
         background-position: center; 
@@ -16,7 +15,6 @@
         background-repeat: no-repeat;
     }
 
-    
     .clima-box {
         position: fixed;
         top: 20px;
@@ -29,8 +27,7 @@
     }
 
     .form-control:placeholder-shown,
-    .form-select:invalid, 
-    select.bg-body-secondary option[value=""] { 
+    .form-select { 
         background-color: #ffe6cc !important; 
     }
 
@@ -174,7 +171,6 @@
 
         async function buscarClima(cidade, uf) {
             try {
-              
                 const geoUrl = `https://nominatim.openstreetmap.org/search?city=${encodeURIComponent(cidade)}&state=${encodeURIComponent(uf)}&country=Brazil&format=json&limit=1`;
                 const geoResponse = await fetch(geoUrl);
                 const geoData = await geoResponse.json();
@@ -184,7 +180,6 @@
                 const lat = geoData[0].lat;
                 const lon = geoData[0].lon;
 
-               
                 const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
                 const weatherResponse = await fetch(weatherUrl);
                 const weatherData = await weatherResponse.json();
@@ -193,13 +188,11 @@
                     const temp = Math.round(weatherData.current_weather.temperature);
                     const infoClima = interpretarWMO(weatherData.current_weather.weathercode);
 
-                   
                     document.getElementById("climaTemp").innerText = `${temp}°C`;
                     document.getElementById("climaCidade").innerText = `${cidade} - ${uf}`;
                     document.getElementById("climaCondicao").innerText = infoClima.texto;
                     document.getElementById("climaIcone").innerText = infoClima.icone;
                     
-                   
                     document.getElementById("climaCard").classList.remove("d-none");
                 }
             } catch (err) {
@@ -230,15 +223,18 @@
                 const selectEstado = document.getElementById("estado");
                 const txtResumo = document.getElementById("resumo");
 
+                
                 txtRua.value = data.logradouro || "Não informado";
                 txtBairro.value = data.bairro || "Não informado";
                 txtCidade.value = data.localidade;
                 selectEstado.value = data.uf;
                 txtResumo.value = `CEP: ${data.cep} | Localidade: ${data.localidade}-${data.uf}`;
                 
+                
                 selectEstado.classList.add("form-control-preenchido");
                 txtResumo.classList.add("form-control-preenchido");
-                git add
+                
+                
                 buscarClima(data.localidade, data.uf);
                 
             } catch (error) {
